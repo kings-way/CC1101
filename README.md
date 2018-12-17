@@ -48,7 +48,7 @@ g++ -lwiringPi TX_Demo.cpp cc1100_raspi.cpp -o TX_Demo
 Example
 -------
 
-TX_Demo: ```sudo ./TX_Demo -v -a1 -r3 -i1000 -t5 -c1 -f434 -m100```
+TX_Demo: ```sudo ./TX_Demo -v -a1 -r3 -i1000 -t1 -c1 -f434 -m4```
 ```
 CC1100 SW [-h] [-V] [-a My_Addr] [-r RxDemo_Addr] [-i Msg_Interval] [-t tx_retries] [-c channel] [-f frequency]
           [-m modulation]
@@ -65,7 +65,7 @@ CC1100 SW [-h] [-V] [-a My_Addr] [-r RxDemo_Addr] [-i Msg_Interval] [-t tx_retri
   -m modulation [1,38,100,250,500,4]	set modulation
   ```
   
-RX_Demo: ```sudo ./RX_Demo -v -a3 -c1 -f434 -m100```
+RX_Demo: ```sudo ./RX_Demo -v -a3 -c1 -f434 -m4```
   ```
   CC1100 SW [-h] [-V] [-v] [-a My_Addr] [-c channel] [-f frequency] [-m modulation]
   -h              			print this help and exit
