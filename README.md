@@ -1,25 +1,14 @@
 CC1101
 ======
 
-driver library for Ti CC1100 / CC1101.<br />
-Contains Lib for Arduino and Raspberry Pi.<br />
-Note: Raspi need wiringPi<br />
-
-Donation
-========
-
-If you are happy with the library and you want to
-spend me a beer, please feel free to use the following link. ;)
-
-https://www.paypal.me/bringmichzumschotter
-
+Driver library for Ti CC1100/CC1101, and demo for Arduino and Raspberry Pi (with wiringpi lib)
 
 Hardware connection
 ===================
 
 check cc1101_arduino.h and/or cc1101_raspi.h for Pin description
 
-CC1101 Vdd = 3.3V
+CC1101 Vdd = 3.3V <br />
 CC1101 max. digital voltage level = 3.3V (not 5V tolerant)
 
 ```
