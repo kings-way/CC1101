@@ -41,7 +41,8 @@ Compile
 
 ```
 sudo apt install wiringpi
-cd RPi
+git clone https://github.com/kings-way/CC1101.git
+cd CC1101/RPi
 make
 ```
 
