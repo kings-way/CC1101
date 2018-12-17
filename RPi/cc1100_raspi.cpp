@@ -662,7 +662,8 @@ uint8_t CC1100::rx_payload_burst(uint8_t rxbuffer[], uint8_t &pktlen)
 uint8_t CC1100::sent_packet(uint8_t my_addr, uint8_t rx_addr, uint8_t *txbuffer,
                             uint8_t pktlen,  uint8_t tx_retries)
 {
-    uint8_t pktlen_ack, rssi, lqi;                              //default package len for ACK
+//    uint8_t pktlen_ack, rssi, lqi;                //default package len for ACK (commented out for unused var)
+    uint8_t pktlen_ack;                             //default package len for ACK
     uint8_t rxbuffer[FIFOBUFFER];
     uint8_t tx_retries_count = 0;
     uint8_t from_sender;
@@ -822,8 +823,8 @@ uint8_t CC1100::check_acknowledge(uint8_t *rxbuffer, uint8_t pktlen, uint8_t sen
     int8_t rssi_dbm;
     uint8_t crc, lqi;
 
-    if((pktlen == 0x05 && \
-        rxbuffer[1] == my_addr || rxbuffer[1] == BROADCAST_ADDRESS) && \
+    if(((pktlen == 0x05 && \
+        rxbuffer[1] == my_addr) || rxbuffer[1] == BROADCAST_ADDRESS) && \
         rxbuffer[2] == sender && \
         rxbuffer[3] == 'A' && rxbuffer[4] == 'c' && rxbuffer[5] == 'k')   //acknowledge received!
         {
