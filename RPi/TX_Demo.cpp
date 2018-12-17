@@ -28,7 +28,7 @@ uint32_t prev_millis_1s_timer = 0;
 uint8_t cc1100_debug = 0;								//set CC1100 lib in no-debug output mode
 uint8_t tx_retries = 1;
 uint8_t rx_demo_addr = 3;
-int interval = 1000;
+uint32_t interval = 1000;
 
 CC1100 cc1100;
 
