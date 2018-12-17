@@ -36,6 +36,50 @@ GDO0   -    not used in this demo
 GND    -    P1-25
 ```
 
+Run demo (on Raspberry Pi)
+==========================
+
+Compile 
+--------
+
+```
+sudo apt install wiringpi
+g++ -lwiringPi RX_Demo.cpp cc1100_raspi.cpp -o RX_Demo
+g++ -lwiringPi TX_Demo.cpp cc1100_raspi.cpp -o TX_Demo
+```
+
+Example
+-------
+
+TX_Demo: ```sudo ./TX_Demo -v -a1 -r3 -i1000 -t5 -c1 -f434 -m100```
+```
+CC1100 SW [-h] [-V] [-a My_Addr] [-r RxDemo_Addr] [-i Msg_Interval] [-t tx_retries] [-c channel] [-f frequency]
+          [-m modulation]
+
+  -h              			print this help and exit
+  -V              			print version and exit
+  -v              			set verbose flag
+  -a my address [1-255] 		set my address
+  -r rx address [1-255] 	  	set RxDemo receiver address
+  -i interval ms[1-6000] 	  	sets message interval timing
+  -t tx_retries [0-255] 	  	sets message send retries
+  -c channel    [1-255] 		set transmit channel
+  -f frequency  [315,434,868,915]  	set ISM band
+  -m modulation [100,250,500]           set modulation
+  ```
+  
+RX_Demo: ```sudo ./RX_Demo -v -a3 -c1 -f434 -m100```
+  ```
+  CC1100 SW [-h] [-V] [-v] [-a My_Addr] [-c channel] [-f frequency] [-m modulation]
+  -h              			print this help and exit
+  -V              			print version and exit
+  -v              			set verbose flag
+  -a my address [1-255] 		set my address
+  -c channel    [1-255] 		set transmit channel
+  -f frequency  [315,434,868,915]  	set ISM band
+  -m modulation [100,250,500]           set modulation
+  ```
+
 General description of RF packet
 ================================
 
@@ -43,13 +87,12 @@ General description of RF packet
 -> pkt_len [1byte] | rx_addr [1byte] | tx_addr [1byte] | payload data [1..60bytes]
 ```
 
-pkt_len = count of bytes which shall transfered over air (rx_addr + tx_addr + payload data)<br />
-rx_addr = address of device, which shall receive the message (0x00 = broadcast to all devices)<br />
-tx_addr = transmitter or my address. the receiver should know who has sent a message.<br />
-payload = 1 to 60 bytes payload data.<br />
+pkt_len: count of bytes which shall transfered over air (rx_addr + tx_addr + payload data)<br />
+rx_addr: address of device, which shall receive the message (0x00 = broadcast to all devices)<br />
+tx_addr: transmitter or my address. the receiver should know who has sent a message.<br />
+payload: 1 to 60 bytes payload data.<br />
 
-TX Bytes example:<br />
--> 0x06 0x03 0x01 0x00 0x01 0x02 0x03<br />
+TX Bytes example:```0x06 0x03 0x01 0x00 0x01 0x02 0x03```
 
 Basic configuration
 ===================
@@ -108,68 +151,3 @@ Follow the following steps, how to store the compiled EEPROM file (*.eep) to you
 - wait till eeprom is written
 - sent ```r``` to verify that eeprom is written.
 - if your EEPROM data is written correct, you can compile and upload the RX_Demo or TX_Demo sketch to that hardware
-
-
-Raspberry Pi
-============
-
-How to compile Raspi Demo files
--------------------------------
-
-be sure first, that you have already wiringPi installed on your Raspberry Pi hardware. 
-
-copy RX_Demo.cpp, TX_Demo.cpp, cc1100_raspi.cpp, cc1100_raspi.h in the same directory and compile: <br />
-
-RX_Demo.cpp<br />
-```
-sudo g++ -lwiringPi RX_Demo.cpp cc1100_raspi.cpp -o RX_Demo
-sudo chmod 755 RX_Demo
-```
-
-TX_Demo.cpp<br />
-```
-sudo g++ -lwiringPi TX_Demo.cpp cc1100_raspi.cpp -o TX_Demo
-sudo chmod 755 TX_Demo
-```
-
-Command Line parameters
------------------------
-
-TX_Demo:<br />
-```
-CC1100 SW [-h] [-V] [-a My_Addr] [-r RxDemo_Addr] [-i Msg_Interval] [-t tx_retries] [-c channel] [-f frequency]
-          [-m modulation]
-
-  -h              			print this help and exit
-  -V              			print version and exit
-  -v              			set verbose flag
-  -a my address [1-255] 		set my address
-  -r rx address [1-255] 	  	set RxDemo receiver address
-  -i interval ms[1-6000] 	  	sets message interval timing
-  -t tx_retries [0-255] 	  	sets message send retries
-  -c channel    [1-255] 		set transmit channel
-  -f frequency  [315,434,868,915]  	set ISM band
-  -m modulation [100,250,500]           set modulation
-  ```
-  
-  Example,<br />
-  ```
-  sudo ./TX_Demo -v -a1 -r3 -i1000 -t5 -c1 -f434 -m100
-  ```
-  
-  RX_Demo:<br />
-  ```
-  CC1100 SW [-h] [-V] [-v] [-a My_Addr] [-c channel] [-f frequency] [-m modulation]
-  -h              			print this help and exit
-  -V              			print version and exit
-  -v              			set verbose flag
-  -a my address [1-255] 		set my address
-  -c channel    [1-255] 		set transmit channel
-  -f frequency  [315,434,868,915]  	set ISM band
-  -m modulation [100,250,500]           set modulation
-  ```
-  
-  Example,<br />
-  ```
-  sudo ./RX_Demo -v -a3 -c1 -f434 -m100
-  ```
