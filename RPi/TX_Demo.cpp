@@ -187,10 +187,11 @@ int main(int argc, char *argv[]) {
 
     			uint8_t res = cc1100.sent_packet(My_addr, Rx_addr, Tx_fifo, Pktlen, tx_retries);
     			
-    			if( res == 1)    //sents package over air. ACK is received via GPIO polling
-    			{
-    				printf("Transmitted Data: count: %u, Timestamp: %ums \n\n", count, time_stamp);
-				}
+//    			if( res == 1)    //sents package over air. ACK is received via GPIO polling
+//    			{
+//    				printf("transmitted timestamp: %ums \r\n\r\n", count, time_stamp);
+//				}
+ 				printf("Transmitted Data: %u, Receiver ACK:%u, Timestamp: %ums \n\n", count, res, time_stamp);
 			count ++;
 			prev_millis_1s_timer = millis();
   		}
