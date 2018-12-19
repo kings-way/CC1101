@@ -167,6 +167,7 @@ int main(int argc, char *argv[]) {
 	cc1100.show_main_settings();             //shows setting debug messages to UART
 	cc1100.show_register_settings();
 	//------------------------- Main Loop ------------------------
+	uint32_t count = 0;
 	for (;;)
 	{
 		delay(1);                                           //delay to reduce system load
@@ -177,10 +178,10 @@ int main(int argc, char *argv[]) {
 
     			uint32_t time_stamp = millis();             //generate time stamp
 
-    			Tx_fifo[3] = (uint8_t)(time_stamp >> 24);   //split 32-Bit timestamp to 4 byte array
-    			Tx_fifo[4] = (uint8_t)(time_stamp >> 16);
-    			Tx_fifo[5] = (uint8_t)(time_stamp >> 8);
-    			Tx_fifo[6] = (uint8_t)(time_stamp);
+    			Tx_fifo[3] = (uint8_t)(count >> 24);   //split 32-Bit timestamp to 4 byte array
+    			Tx_fifo[4] = (uint8_t)(count >> 16);
+    			Tx_fifo[5] = (uint8_t)(count >> 8);
+    			Tx_fifo[6] = (uint8_t)(count);
 
     			Pktlen = 0x07;                              //set packet len to 0x13
 
@@ -188,8 +189,9 @@ int main(int argc, char *argv[]) {
     			
     			if( res == 1)    //sents package over air. ACK is received via GPIO polling
     			{
-    				printf("transmitted tx_timestamp: %ums \r\n\r\n", time_stamp);
+    				printf("Transmitted Data: count: %u, Timestamp: %ums \n\n", count, time_stamp);
 				}
+			count ++;
 			prev_millis_1s_timer = millis();
   		}
 

@@ -705,7 +705,7 @@ uint8_t CC1100::sent_packet(uint8_t my_addr, uint8_t rx_addr, uint8_t *txbuffer,
         tx_retries_count++;                                     //increase tx retry counter
 
         if(debug_level > 0){                                    //debug output messages
-            printf("count: 0x%02X \r\n", tx_retries_count);
+            printf("Retry: 0x%02X \r\n", tx_retries_count);
         }
     }while(tx_retries_count <= tx_retries);                     //while count of retries is reaches
 
